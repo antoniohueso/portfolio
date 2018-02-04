@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:replace="layout :: common_head(~{::title}, ~{::script})">
+
+    <title>Planificación</title>
+
+    <link th:remove="all" rel="stylesheet" href="../../webapp/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link th:remove="all" rel="stylesheet" href="../../webapp/fontawesome/css/fontawesome-all.min.css" />
+    <link th:remove="all" rel="stylesheet" href="../../webapp/css/styles.css" />
+
+    <script type="text/javascript" src="/js/planificacion.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <header th:replace="layout :: common_header"></header>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="plan-tab" data-toggle="tab" href="#plan" role="tab" aria-controls="plan" aria-selected="true">Planificación</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="gantt-tab" data-toggle="tab" href="#gantt" role="tab" aria-controls="gantt" aria-selected="false">Gantt</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="plan" role="tabpanel" aria-labelledby="plan-tab">
+
+            <div class="plan-toolbar row">
+
+                <div class="col col-12">
+                    <div class="btn-group-sm" role="group" aria-label="Toolbar">
+                        <a class="btn btn-info" th:href="${'/planificacion/'+id+'/add'}"><i class="fa fa-plus"></i></a>
+                        <button id="save-btn" type="button" class="btn btn-info"><i class="fa fa-save"></i></button>
+                        <button type="button" class="btn btn-info"><i class="fa fa-arrow-right"></i></button>
+
+                    </div>
+                </div>
+
+                <form th:if="${selac}" method="post" action="/solicitud">
+
+                    <fieldset>
+
+                        <legend>Actividad</legend>
+
+                        <!-- Campos del formulario -->
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input name="name" type="text" th:value="${selac.name}" class="form-control-sm" placeholder="Nombre de la actividad" required>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-4">
+                                <label>F.Inicio</label>
+                                <input name="startDate" type="date" th:value="${#calendars.format(selac.startDate,'yyyy-MM-dd')}" class="form-control-sm" required>
+                            </div>
+
+                            <div class="col-4">
+                                <label>F.fin</label>
+                                <input name="endDate" type="date" th:value="${#calendars.format(selac.startDate,'yyyy-MM-dd')}" class="form-control-sm" required>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>Duración</label>
+                                    <input name="duration" type="number" min="0" max="365" th:value="${selac.duration}" class="form-control-sm" required>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-6">
+                                <label>Avance</label>
+                                <input name="ac.percentComplete" type="number" min="0" max="100" th:value="${selac.percentComplete}" class="form-control-sm" required>
+                            </div>
+
+                            <div class="col-6">
+                                <label>F.fin</label>
+                                <input name="dependencies" type="text" th:value="${selac.dependencies}" percentCompleteclass="form-control-sm" required>
+                            </div>
+
+                        </div>
+
+                        <input type="submit" class="btn btn-info">
+
+                    </fieldset>
+
+                </form>
+
+
+
+                <div id="plan-table-data" class="col col-12">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>F.Comienzo</th>
+                            <th>F.Fin</th>
+                            <th>Duración</th>
+                            <th>%Avance</th>
+                            <th>Dependencias</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="ac : ${plan.actividades}">
+                            <td th:text="${ac.id}">
+
+                            </td>
+                            <td>
+                                <input name="ac.name" type="text" th:value="${ac.name}" class="form-control-sm" placeholder="Nombre de la actividad" required>
+                            </td>
+                            <td>
+                                <input name="ac.startDate" type="date" th:value="${#calendars.format(ac.startDate,'yyyy-MM-dd')}" class="form-control-sm" required>
+                            </td>
+                            <td>
+                                <input name="ac.endDate" type="date" th:value="${#calendars.format(ac.endDate,'yyyy-MM-dd')}" class="form-control-sm" required>
+                            </td>
+                            <td>
+                                <input name="ac.duration" type="number" min="0" max="365" th:value="${ac.duration}" class="form-control-sm" required>
+                            </td>
+
+                            <td>
+                                <input name="ac.percentComplete" type="number" min="0" max="100" th:value="${ac.percentComplete}" class="form-control-sm" required>
+                            </td>
+
+                            <td>
+                                <input name="ac.dependencies" type="text" th:value="${ac.dependencies}" percentCompleteclass="form-control-sm" required>
+                            </td>
+                            <td>
+                                <a th:href="${'/planificacion/'+id+'/add'}"><i class="fa fa-trash"></i></a>
+                                <a th:href="${'/planificacion/'+id+'/add'}"><i class="fa fa-save"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="tab-pane" id="gantt" role="tabpanel" aria-labelledby="gantt-tab">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

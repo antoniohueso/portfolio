@@ -4,21 +4,20 @@
 
 <body>
 
-<head th:fragment="common_head(title, links, scripts)">
+<head th:fragment="common_head(title, links)">
     <title th:replace="${title}">Portfolio</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome-all.min.css" />
     <link rel="stylesheet" href="/css/styles.css" />
 
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
 
-
     <th:block th:replace="${links}" />
 
-    <th:block th:replace="${scripts}" />
 
 </head>
 

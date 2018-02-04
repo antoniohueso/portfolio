@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 
-<head th:replace="layout :: common_head(~{::title}, _, _)">
+<head th:replace="layout :: common_head(~{::title}, _)">
 
-    <title>Awesome - Main</title>
+    <title>Nueva solicitud de evolutivo o proyecto</title>
 
 </head>
 
@@ -31,9 +31,7 @@
                         Los siguientes campos son obligatorios:
                     </p>
 
-                    <p th:text="${error}" class="font-weight-bold">
-
-                    </p>
+                    <p th:each="e : ${error}" th:text="${e}" class="font-weight-bold"></p>
                 </div>
 
                 <!-- Mensage de Ok -->
@@ -43,7 +41,7 @@
                     </button>
 
                     <p class="font-weight-bold">
-                        Su solicitud ha sido registrada (ID: <span th:text="${id}"></span>)
+                        Su solicitud ha sido registrada (ID: <span th:text="${okMessage}"></span>)
                     </p>
                     <a routerLink="/solicitudes">Ir al panel de solicitudes</a>
                 </div>

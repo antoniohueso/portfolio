@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import utils.Utils;
 
 import javax.validation.Valid;
 
@@ -30,18 +31,17 @@ public class SolicitudPage {
 
         System.out.println(desarrollo.fechaCambioNormativo);
 
-        desarrolloRepository.insert(desarrollo);
+        desarrollo = desarrolloRepository.insert(desarrollo);
 
 
         if(bindingResult.hasErrors()) {
-            System.out.println("Pollas: " + bindingResult.getFieldErrors());
-            model.addAttribute("error","Mierda");
-            //return "solicitud";
+            model.addAttribute("error", Utils.ListErrorsToListOfStrings(bindingResult.getFieldErrors()));
+            return "solicitud";
         }
 
+        model.addAttribute("okMessage", desarrollo.getId());
 
-
-        return "redirect:/solicitud";
+        return "solicitud";
     }
 
 }

@@ -1,9 +1,11 @@
 package es.corpme.sc.portfolio.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -16,32 +18,33 @@ public class Desarrollo {
     @Id
     public String id;
 
-    @NotNull
+    @NotNull @NotEmpty(message = "El campo nombre es obligatorio")
     public String nombre;
 
-    @NotNull
     public Date fechaCreacion = new Date();
 
     @NotNull
     public String solicitadaPor = "ahg";
 
-    @NotNull
+    @NotNull @Min(value = TipoDesarrollo.EVOLUTIVO, message = "El campo tipo es obligatorio")
     public int tipo = TipoDesarrollo.EVOLUTIVO;
 
-    @NotNull
+    @NotNull @Min(value = ImportanciaDesarrollo.MEDIA, message = "El campo importancia es obligatorio")
     public int importancia = ImportanciaDesarrollo.MEDIA;
 
     @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     public Date fechaCambioNormativo = null;
 
-    @NotNull
+    @NotNull @NotEmpty(message = "El campo justificación de negocio es obligatorio")
     public String justificacionNegocio;
 
-    @NotNull
+    @NotNull @NotEmpty(message = "El campo áreas involucradas es obligatorio")
     public String areasInvolucradas;
 
     @NotNull
     public int fase = FaseDesarrollo.BACKLOGDMO;
+
+    public Planificacion planificacion = new Planificacion();
 
     public String getId() {
         return id;
@@ -103,6 +106,7 @@ public class Desarrollo {
         return justificacionNegocio;
     }
 
+
     public void setJustificacionNegocio(String justificacionNegocio) {
         this.justificacionNegocio = justificacionNegocio;
     }
@@ -123,5 +127,11 @@ public class Desarrollo {
         this.areasInvolucradas = areasInvolucradas;
     }
 
+    public Planificacion getPlanificacion() {
+        return planificacion;
+    }
 
+    public void setPlanificacion(Planificacion planificacion) {
+        this.planificacion = planificacion;
+    }
 }
