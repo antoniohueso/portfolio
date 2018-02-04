@@ -1,0 +1,127 @@
+package es.corpme.sc.portfolio.entity;
+
+import org.hibernate.validator.constraints.Range;
+import org.springframework.data.annotation.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+
+/**
+ * Created by ahg on 4/2/18.
+ */
+
+public class Desarrollo {
+
+    @Id
+    public String id;
+
+    @NotNull
+    public String nombre;
+
+    @NotNull
+    public Date fechaCreacion = new Date();
+
+    @NotNull
+    public String solicitadaPor = "ahg";
+
+    @NotNull
+    public int tipo = TipoDesarrollo.EVOLUTIVO;
+
+    @NotNull
+    public int importancia = ImportanciaDesarrollo.MEDIA;
+
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+    public Date fechaCambioNormativo = null;
+
+    @NotNull
+    public String justificacionNegocio;
+
+    @NotNull
+    public String areasInvolucradas;
+
+    @NotNull
+    public int fase = FaseDesarrollo.BACKLOGDMO;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getSolicitadaPor() {
+        return solicitadaPor;
+    }
+
+    public void setSolicitadaPor(String solicitadaPor) {
+        this.solicitadaPor = solicitadaPor;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getImportancia() {
+        return importancia;
+    }
+
+    public void setImportancia(int importancia) {
+        this.importancia = importancia;
+    }
+
+    public Date getFechaCambioNormativo() {
+        return fechaCambioNormativo;
+    }
+
+    public void setFechaCambioNormativo(Date fechaCambioNormativo) {
+        this.fechaCambioNormativo = fechaCambioNormativo;
+    }
+
+    public String getJustificacionNegocio() {
+        return justificacionNegocio;
+    }
+
+    public void setJustificacionNegocio(String justificacionNegocio) {
+        this.justificacionNegocio = justificacionNegocio;
+    }
+
+    public int getFase() {
+        return fase;
+    }
+
+    public void setFase(int fase) {
+        this.fase = fase;
+    }
+
+    public String getAreasInvolucradas() {
+        return areasInvolucradas;
+    }
+
+    public void setAreasInvolucradas(String areasInvolucradas) {
+        this.areasInvolucradas = areasInvolucradas;
+    }
+
+
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:replace="layout :: common_head(~{::title}, _, _)">
+
+    <title>Awesome - Main</title>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <header th:replace="layout :: common_header"></header>
+
+    <div class="f-solicitud-width">
+
+        <form method="post" action="/solicitud">
+
+            <fieldset>
+
+                <legend>Solicitud de nuevo proyecto o evolutivo</legend>
+
+                <!-- Mensage de error -->
+                <div th:if="${error}" class="alert alert-info alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p>
+                        Los siguientes campos son obligatorios:
+                    </p>
+
+                    <p th:text="${error}" class="font-weight-bold">
+
+                    </p>
+                </div>
+
+                <!-- Mensage de Ok -->
+                <div th:if="${okMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                    <p class="font-weight-bold">
+                        Su solicitud ha sido registrada (ID: <span th:text="${id}"></span>)
+                    </p>
+                    <a routerLink="/solicitudes">Ir al panel de solicitudes</a>
+                </div>
+
+                <!-- Campos del formulario -->
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input name="nombre" type="text" class="form-control" placeholder="Nombre del proyecto o evolutivo"
+                           required>
+                </div>
+
+                <div class="form-group row">
+
+                    <div class="col-4">
+                        <label>Tipo</label>
+                        <select name="tipo" class="form-control" required>
+                            <option value="0" selected>Evolutivo</option>
+                            <option value="1">Proyecto</option>
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <label>Importancia</label>
+                        <select name="importancia" class="form-control" required>
+                            <option value="0">Baja</option>
+                            <option value="1" selected>Media</option>
+                            <option value="2">Alta</option>
+                            <option value="3">Urgente</option>
+                        </select>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>F. cambio normativo</label>
+                            <input name="fechaCambioNormativo" type="date" class="form-control"
+                                   placeholder="Fecha de cambio normativo">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Justificación de negocio</label>
+                <textarea name="justificacionNegocio" rows="10" class="form-control"
+                          placeholder="Justificación de negocio" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Áreas de desarrollo involucradas</label>
+                <textarea name="areasInvolucradas" class="form-control" placeholder="Áreas de desarrollo involucradas"
+                          required></textarea>
+                </div>
+
+                <input type="submit" class="btn btn-info">
+
+            </fieldset>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

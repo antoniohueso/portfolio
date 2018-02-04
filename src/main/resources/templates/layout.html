@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<head th:fragment="common_head(title, links, scripts)">
+    <title th:replace="${title}">Portfolio</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+
+    <th:block th:replace="${links}" />
+
+    <th:block th:replace="${scripts}" />
+
+</head>
+
+<header th:fragment="common_header">
+    <nav>
+        <ul class="nav">
+            <li class="nav-item">
+                <h3>Sauron</h3>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/solicitud">Nueva solicitud</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/planificacion">Planificacion</a>
+            </li>
+
+        </ul>
+
+        <hr/>
+
+    </nav>
+</header>
+
+
+</body>
+
+</html>

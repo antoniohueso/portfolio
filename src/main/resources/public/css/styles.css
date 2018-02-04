@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+
+body, html {
+    font-family: Roboto, sans-serif; }
+
+h1, h2, h3, h4, h5, h6 {
+    color: #6c757d; }
+
+legend {
+    font-family: Roboto Condensed, sans-serif;
+    color: #17a2b8; }
+
+label {
+    font-family: Roboto Condensed, sans-serif;
+    font-weight: bolder;
+    color: #6c757d; }
+
+.f-solicitud-width {
+    margin: auto;
+    border: solid #f7f7f9;
+    padding-top: 1rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
+    padding-bottom: 1rem;
+}
